@@ -79,7 +79,7 @@
     <h1>Quel morceau n'est <em>pas</em> des années 80 ?</h1>
     <form id="quizForm">
       <label>
-        <input type="radio" name="song" value="1" />
+        <input type="radio" name="song" value="4" />
         Billie Jean – Michael Jackson
       </label>
       <label>
@@ -87,7 +87,7 @@
         Take On Me – A-ha
       </label>
       <label>
-        <input type="radio" name="song" value="3" />
+        <input type="radio" name="song" value="7" />
         Blinding Lights – The Weeknd
       </label>
       <button type="submit">Valider</button>
@@ -103,20 +103,13 @@
       e.preventDefault();
 
       const selected = form.song.value;
+
       if (!selected) {
         result.innerHTML = '<span class="error">Veuillez sélectionner une réponse.</span>';
         return;
       }
 
-      if (selected === "3") {
-        result.textContent = "Bonne réponse ! Le chiffre est : 7";
-      } else {
-        result.innerHTML = '<span class="error">Mauvaise réponse ! Veuillez réessayer.</span>';
-        setTimeout(() => {
-          form.reset();
-          result.textContent = "";
-        }, 2000);
-      }
+      result.textContent = `Le chiffre associé à votre réponse est : ${selected}`;
     });
   </script>
 </body>
