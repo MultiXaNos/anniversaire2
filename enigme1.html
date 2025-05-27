@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mission Lumière</title>
+  <title>Quiz Musical</title>
   <style>
     body {
       font-family: "Segoe UI", Roboto, sans-serif;
       margin: 0;
       padding: 1em;
-      line-height: 1.6;
       background-color: #111;
       color: #fff;
     }
@@ -25,22 +24,100 @@
 
     h1 {
       color: #ff4081;
-      font-size: 1.5em;
+      font-size: 1.4em;
       text-align: center;
+      margin-bottom: 1em;
     }
 
-    p {
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+    }
+
+    label {
+      background-color: #2b2b2b;
+      padding: 0.8em;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    label:hover {
+      background-color: #333;
+    }
+
+    button {
+      padding: 0.8em;
+      background-color: #ff4081;
+      border: none;
+      color: white;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    button:hover {
+      background-color: #e73370;
+    }
+
+    .result {
       margin-top: 1em;
+      font-size: 1.2em;
+      text-align: center;
+      color: #0f0;
+    }
+
+    .error {
+      color: #f44;
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Catastrophe !</h1>
-    <p>Bien que la musique soit revenue, vous vous rendez compte que ce n'est pas le cas de la lumière.</p>
-    <p>En effet, la boule à facette est verrouillée par un code laissé par le DJ originel : <strong>Franck Master Beats</strong>.</p>
-    <p>Sans elle, impossible d'allumer les spots, les strobos, ni de faire un moonwalk sur la piste de danse.</p>
-    <p>À vous de retrouver les reliques de Franck Master Beats, résoudre leurs énigmes pour ainsi décrypter le code d'activation de la boule.</p>
+    <h1>Quel morceau n'est <em>pas</em> des années 80 ?</h1>
+    <form id="quizForm">
+      <label>
+        <input type="radio" name="song" value="1" />
+        Billie Jean – Michael Jackson
+      </label>
+      <label>
+        <input type="radio" name="song" value="2" />
+        Take On Me – A-ha
+      </label>
+      <label>
+        <input type="radio" name="song" value="3" />
+        Blinding Lights – The Weeknd
+      </label>
+      <button type="submit">Valider</button>
+    </form>
+    <div class="result" id="result"></div>
   </div>
+
+  <script>
+    const form = document.getElementById("quizForm");
+    const result = document.getElementById("result");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const selected = form.song.value;
+      if (!selected) {
+        result.innerHTML = '<span class="error">Veuillez sélectionner une réponse.</span>';
+        return;
+      }
+
+      if (selected === "3") {
+        result.textContent = "Bonne réponse ! Le chiffre est : 7";
+      } else {
+        result.innerHTML = '<span class="error">Mauvaise réponse ! Veuillez réessayer.</span>';
+        setTimeout(() => {
+          form.reset();
+          result.textContent = "";
+        }, 2000);
+      }
+    });
+  </script>
 </body>
 </html>
